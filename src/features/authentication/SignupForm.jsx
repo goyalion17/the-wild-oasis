@@ -11,7 +11,12 @@ function SignupForm() {
   const { errors } = formState;
 
   function onSubmit({ fullName, email, password }) {
-    signup({ fullName, email, password }, { onSettled: () => reset() });
+    signup(
+      { fullName, email, password },
+      {
+        onSettled: () => reset(),
+      }
+    );
   }
 
   return (
@@ -21,7 +26,7 @@ function SignupForm() {
           type="text"
           id="fullName"
           disabled={isLoading}
-          {...register("fullName", { required: "this field is required" })}
+          {...register("fullName", { required: "This field is required" })}
         />
       </FormRow>
 
@@ -31,7 +36,7 @@ function SignupForm() {
           id="email"
           disabled={isLoading}
           {...register("email", {
-            required: "this field is required",
+            required: "This field is required",
             pattern: {
               value: /\S+@\S+\.\S+/,
               message: "Please provide a valid email address",
@@ -49,7 +54,7 @@ function SignupForm() {
           id="password"
           disabled={isLoading}
           {...register("password", {
-            required: "this field is required",
+            required: "This field is required",
             minLength: {
               value: 8,
               message: "Password needs a minimum of 8 characters",
@@ -64,7 +69,7 @@ function SignupForm() {
           id="passwordConfirm"
           disabled={isLoading}
           {...register("passwordConfirm", {
-            required: "this field is required",
+            required: "This field is required",
             validate: (value) =>
               value === getValues().password || "Passwords need to match",
           })}
@@ -73,7 +78,12 @@ function SignupForm() {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset" disabled={isLoading}>
+        <Button
+          variation="secondary"
+          type="reset"
+          disabled={isLoading}
+          onClick={reset}
+        >
           Cancel
         </Button>
         <Button disabled={isLoading}>Create new user</Button>
